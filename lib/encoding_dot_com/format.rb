@@ -24,7 +24,10 @@ module EncodingDotCom
         if attrs.empty?
           @allowed_attributes
         else
-          @allowed_attributes += attrs.map {|a| a.to_s }.each { |attr| define_method(attr) { @attributes[attr] } }
+          attrs.map! {|a| a.to_s }
+          attrs.each { |attr| define_method(attr) { @attributes[attr] } }
+          @allowed_attributes += attrs
+          @allowed_attributes.uniq!
         end
       end
       
@@ -35,6 +38,7 @@ module EncodingDotCom
         else
           allowed_attributes *attrs
           @boolean_attributes += attrs.map {|a| a.to_s }
+          @boolean_attributes.uniq!
         end
       end
     end
