@@ -1,5 +1,3 @@
-require 'parsedate'
-
 module EncodingDotCom
 
   # Represents a video or image in the encoding.com queue
@@ -20,9 +18,20 @@ module EncodingDotCom
 
     private
 
-    def parse_time_node(node)
-      time_elements = ParseDate.parsedate(node.text)
-      Time.local *time_elements unless time_elements.all? {|e| e.nil? || e == 0 }
+    if Time.respond_to? :parse
+      def parse_time_node(node)
+        begin
+          Time.parse(node.text)
+        rescue ArgumentError
+          nil
+        end
+      end
+    else
+      require 'parsedate'
+      def parse_time_node(node)
+        time_elements = ParseDate.parsedate(node.text)
+        Time.local *time_elements unless time_elements.all? {|e| e.nil? || e == 0 }
+      end
     end
   end
 end
