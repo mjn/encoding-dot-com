@@ -1,13 +1,7 @@
+source :rubygems
+
 gem "nokogiri"
-gem 'rspec'
+gem 'rspec', :group => :test
+gem 'rcov', :group => :test
 gem 'jeweler'
-gem 'roodi'
 gem 'curb'
-
-source "http://gemcutter.org"
-
-bundle_path "vendor/gems"
-
-bin_path "bin"
-
-disable_rubygems

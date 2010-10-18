@@ -1,7 +1,8 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "Encoding.com Queue facade" do
-
+  include XpathMatchers
+  
   before :each do
     @http = mock("Http Interface")
     @facade = EncodingDotCom::Queue.new(1234, "abcd", @http)

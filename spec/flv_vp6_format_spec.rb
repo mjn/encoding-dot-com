@@ -1,7 +1,8 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "Encoding.com FLV VP6 Format" do
-
+  include XpathMatchers
+  
   it "should have an output attribute of 'thumbnail'" do
     EncodingDotCom::FLVVP6Format.new.output.should == "flv"
   end

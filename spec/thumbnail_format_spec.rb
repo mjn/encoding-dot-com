@@ -1,7 +1,8 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "Encoding.com Thumbnail Format" do
-
+  include XpathMatchers
+  
   it "should have an output attribute of 'thumbnail'" do
     EncodingDotCom::ThumbnailFormat.new.output.should == "thumbnail"
   end

@@ -1,8 +1,14 @@
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+begin
+  # Require the preresolved locked set of gems.
+  require File.expand_path('../../.bundle/environment', __FILE__)
+rescue LoadError
+  # Fallback on doing the resolve at runtime.
+  require 'rubygems'
+  require 'bundler'
+  Bundler.setup
+end
 
-require File.expand_path(File.join(File.dirname(__FILE__), '..', 'vendor', 'gems', 'environment'))
-Bundler.require_env
+Bundler.require(:test, :default)
 
 require 'encoding-dot-com'
 
@@ -39,8 +45,4 @@ module XpathMatchers
   def have_xpath(xpath)
     HaveXpath.new(xpath)
   end
-end
-
-Spec::Runner.configure do |config|
-  config.include(XpathMatchers)
 end

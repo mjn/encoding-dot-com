@@ -1,7 +1,8 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "Encoding.com video format" do
-
+  include XpathMatchers
+  
   describe "#create" do
     it "should return a VideoFormat when the output type is a video output" do
       EncodingDotCom::Format.create("output" => "mp4").should be_instance_of(EncodingDotCom::VideoFormat)

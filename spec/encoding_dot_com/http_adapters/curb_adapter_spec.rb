@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 describe "CurbAdapter" do
   before :each do
     @http = EncodingDotCom::HttpAdapters::CurbAdapter.new
-    @mock_easy = mock("Curl::Easy mock", :null_object => true)
+    @mock_easy = mock("Curl::Easy mock").as_null_object
     @mock_easy.should_receive(:follow_location=).with(true)    
     Curl::Easy.should_receive(:new).with("http://example.com").and_yield(@mock_easy).and_return(@mock_easy)    
   end
